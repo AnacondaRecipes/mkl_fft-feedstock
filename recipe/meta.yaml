@@ -1,5 +1,6 @@
 {% set version = "1.0.4" %}
 {% set buildnumber = 0 %}
+{% set sha256 = "7e568d7b6c5f0b22eb3acd60a7dfadac37483b58083035b78e9f929083fa5d81" %}
 
 package:
     name: mkl_fft
