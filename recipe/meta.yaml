@@ -21,7 +21,7 @@ requirements:
   host:
   - python
   - setuptools
-  - mkl-devel
+  - mkl-devel  {{ mkl }}
   - cython
   - numpy 1.11.*
   run:
