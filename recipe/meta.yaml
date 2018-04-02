@@ -1,0 +1,45 @@
+# Loosely based on https://github.com/IntelPython/mkl_fft/blob/65d80f6142108717bd5132cd6bb6db782f4e16c5/conda-recipe/meta.yaml
+{% set version = "1.0.1" %}
+{% set buildnumber = 0 %}
+{% set sha256 = "7e568d7b6c5f0b22eb3acd60a7dfadac37483b58083035b78e9f929083fa5d81" %}
+
+package:
+  name: mkl_fft
+  version: {{ version }}
+
+source:
+  fn: mkl_fft-{{version}}.tar.gz
+  url: https://github.com/IntelPython/mkl_fft/archive/v{{ version }}.tar.gz
+
+build:
+  number: {{buildnumber}}
+  script: python setup.py build install --single-version-externally-managed --record=record.txt
+
+requirements:
+  build:
+  - {{ compiler('c') }}
+  host:
+  - python
+  - setuptools
+  - mkl-devel  {{ mkl }}
+  - cython
+  - numpy 1.11.*
+  run:
+  - python
+  - {{ pin_compatible('numpy') }}
+
+test:
+  requires:
+  - nose
+  commands:
+    - nosetests -v mkl_fft
+  imports:
+    - mkl_fft
+    - mkl_fft._numpy_fft
+    - mkl_fft._scipy_fft
+
+about:
+  home: http://github.com/IntelPython/mkl_fft
+  license: BSD
+  license_file: LICENSE.txt
+  summary: NumPy-based implementation of Fast Fourier Transform using Intel (R) Math Kernel Library
