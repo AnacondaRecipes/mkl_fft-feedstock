@@ -1,6 +1,6 @@
 {% set version = "1.0.4" %}
 {% set buildnumber = 0 %}
-{% set sha256 = "7e568d7b6c5f0b22eb3acd60a7dfadac37483b58083035b78e9f929083fa5d81" %}
+{% set sha256 = "bfde7307ca91b45f436ebe3ea2d1fd094d92687faeb061bda3cfa99a80524a18" %}
 
 package:
     name: mkl_fft
@@ -20,7 +20,7 @@ requirements:
     host:
       - python
       - setuptools
-      - mkl-devel
+      - mkl-devel  {{ mkl }}
       - cython
       - numpy-devel 1.11.*
     run:
