@@ -11,7 +11,9 @@ source:
     sha256: 139e99aaad622f348d37b729bbaa0895c73e344902b38e7e73a3d02528dcdf04
 
 build:
-    number: {{buildnumber}}
+  number: {{ buildnumber }}
+  skip: True  # [ppc64le]
+  script: python setup.py build install --single-version-externally-managed --record=record.txt
 
 requirements:
     build:
