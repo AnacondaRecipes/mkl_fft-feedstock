@@ -13,7 +13,7 @@ source:
 build:
   number: {{ buildnumber }}
   skip: True  # [ppc64le]
-  script: python setup.py build install --single-version-externally-managed --record=record.txt
+  script: {{PYTHON}} setup.py build install --single-version-externally-managed --record=record.txt
 
 requirements:
     build:
