@@ -1,0 +1,22 @@
+From e4b1e5719406d861d97972f77977bd3dc0c6c43a Mon Sep 17 00:00:00 2001
+From: Mike Sarahan <msarahan@gmail.com>
+Date: Fri, 27 Jul 2018 08:48:26 -0500
+Subject: [PATCH] py27: change ModuleNotFoundError to ImportError
+
+---
+ mkl_fft/_pydfti.pyx | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/mkl_fft/_pydfti.pyx b/mkl_fft/_pydfti.pyx
+index b00e814..4a88c6d 100644
+--- a/mkl_fft/_pydfti.pyx
++++ b/mkl_fft/_pydfti.pyx
+@@ -29,7 +29,7 @@ import numpy as np
+ cimport numpy as cnp
+ try:
+     from numpy.core.multiarray_tests import internal_overlap
+-except ModuleNotFoundError:
++except ImportError:
+     # Module has been renamed in NumPy 1.15
+     from numpy.core._multiarray_tests import internal_overlap
+ 
