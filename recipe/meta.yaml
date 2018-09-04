@@ -26,7 +26,7 @@ requirements:
       - setuptools
       - mkl-devel  {{ mkl }}
       - cython
-      - numpy-devel 1.11.*
+      - numpy-devel  {{ numpy }}
     run:
       - python
 
@@ -47,7 +47,7 @@ about:
     description:
         NumPy-based implementation of Fast Fourier Transform using Intel (R) Math Kernel Library.
         Supports in-place and out-of-place, 1D and ND complex FFT on arrays of single and double precision
-        with arbitrary memory layout, so long as array strides are multiples of its itemsize. 
+        with arbitrary memory layout, so long as array strides are multiples of its itemsize.
     summary: NumPy-based implementation of Fast Fourier Transform using Intel (R) Math Kernel Library.
 
 extra:
