@@ -9,7 +9,7 @@ source:
     sha256: 200d166b9e9867d390fbc4b46c635dae53d1d2eb054ba3a94c382789526fdb6d
 
 build:
-  number: 1
+  number: 2
   # numpy no longer supports python 3.6 and lower
   skip: True  # [ppc64le or py<37]
   script: {{PYTHON}} setup.py build install --single-version-externally-managed --record=record.txt
