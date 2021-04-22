@@ -9,7 +9,7 @@ source:
     sha256: 200d166b9e9867d390fbc4b46c635dae53d1d2eb054ba3a94c382789526fdb6d
 
 build:
-  number: 0
+  number: 2
   skip: True  # [ppc64le]
   script: {{PYTHON}} setup.py build install --single-version-externally-managed --record=record.txt
 
@@ -22,9 +22,10 @@ requirements:
       - setuptools
       - mkl-devel  {{ mkl }}
       - cython
-      - numpy-devel  {{ numpy }}
+      - numpy-base  {{ numpy }}
     run:
       - python
+      - numpy >={{ numpy }},<2.0a0
 
 test:
     commands:
