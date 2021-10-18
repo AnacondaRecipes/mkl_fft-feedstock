@@ -10,7 +10,7 @@ source:
 
 build:
   number: 0
-  skip: True  # [ppc64le]
+  skip: True  # [not x86]
   script: {{PYTHON}} setup.py build install --single-version-externally-managed --record=record.txt
 
 requirements:
