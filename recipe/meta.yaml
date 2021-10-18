@@ -9,7 +9,7 @@ source:
     sha256: 9039d301deb4c381b961a4c9cc889aa0e7e1dba04d1685c988ef36b2e2a66067
 
 build:
-  number: 2
+  number: 0
   skip: True  # [ppc64le]
   script: {{PYTHON}} setup.py build install --single-version-externally-managed --record=record.txt
 
