@@ -12,6 +12,8 @@ build:
   number: 0
   skip: True  # [not x86]
   script: {{PYTHON}} setup.py build install --single-version-externally-managed --record=record.txt
+  script_env:
+   - MKLROOT={{PREFIX}}
 
 requirements:
     build:
