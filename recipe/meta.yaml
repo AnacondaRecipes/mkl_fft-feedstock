@@ -38,6 +38,8 @@ test:
       - pytest
     imports:
       - mkl_fft
+      - mkl_fft._numpy_fft
+      - mkl_fft._scipy_fft
       - mkl_fft.interfaces
       - mkl_fft.interfaces.numpy_fft
       - mkl_fft.interfaces.scipy_fft
