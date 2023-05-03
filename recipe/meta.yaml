@@ -42,6 +42,7 @@ test:
       - pip check
     requires:
       - pytest
+      - pip
     imports:
       - mkl_fft
       - mkl_fft._numpy_fft
