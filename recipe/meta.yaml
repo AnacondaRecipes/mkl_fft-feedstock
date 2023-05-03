@@ -7,9 +7,12 @@ package:
 source:
     url: https://github.com/IntelPython/mkl_fft/archive/v{{version}}.tar.gz
     sha256: 419420e2f0a4d8435ee760a53c2e31a0a939b82dee999fcc55f171114e33f9c1
+    patches:
+      # setup.py shows dependency on mkl, which we call mkl-service in conda...
+      - 0001-install_requires-mkl-service.patch
 
 build:
-  number: 0
+  number: 1
   skip: True  # [not x86]
   script: {{PYTHON}} setup.py build install --single-version-externally-managed --record=record.txt
   script_env:
@@ -19,6 +22,8 @@ requirements:
     build:
       - {{ compiler('c') }}
       - {{ compiler('cxx') }}
+      - patch
+      - m2-patch
     host:
       - python
       - setuptools
@@ -34,6 +39,7 @@ requirements:
 test:
     commands:
       - pytest -v --pyargs mkl_fft
+      - pip check
     requires:
       - pytest
     imports:
