@@ -12,7 +12,7 @@ source:
       - 0001-install_requires-mkl-service.patch
 
 build:
-  number: 1
+  number: 2
   skip: True  # [not x86]
   script: {{PYTHON}} setup.py build install --single-version-externally-managed --record=record.txt
   script_env:
@@ -34,7 +34,7 @@ requirements:
       - python
       - mkl
       - mkl-service
-      - numpy >={{ numpy }},<2.0a0
+      - {{ pin_compatible('numpy') }}
 
 test:
     commands:
