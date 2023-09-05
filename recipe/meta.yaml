@@ -26,6 +26,7 @@ requirements:
     host:
       - python
       - setuptools
+      - wheel
       - mkl-devel  {{ mkl }}
       - cython 3
       - numpy-base  {{ numpy }}
