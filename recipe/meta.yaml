@@ -1,4 +1,4 @@
-{% set version = "1.3.8" %}
+{% set version = "1.3.10" %}
 
 package:
     name: mkl_fft
@@ -6,7 +6,7 @@ package:
 
 source:
     url: https://github.com/IntelPython/mkl_fft/archive/v{{version}}.tar.gz
-    sha256: 5d0976eb4bc174dd3338b634bfc957e33868c9dc439a63dc25e1e6f6ab159662
+    sha256: c519e7baeb609211d1940c5f69e7f6779895fe143f9476282a3dbb2032dd56ad
     patches:
       # setup.py shows dependency on mkl, which we call mkl-service in conda...
       - 0001-install_requires-mkl-service.patch
@@ -14,6 +14,7 @@ source:
 build:
   number: 0
   skip: True  # [not x86]
+  skip: True  # [py<39 or osx]
   script: {{PYTHON}} -m pip install --no-build-isolation --no-deps .
   script_env:
    - MKLROOT={{PREFIX}}
@@ -30,12 +31,12 @@ requirements:
       - wheel
       - mkl-devel  {{ mkl }}
       - cython 3
-      - numpy-base  {{ numpy }}
+      - numpy-base 2.0.0
     run:
       - python
       - mkl
       - mkl-service
-      - {{ pin_compatible('numpy') }}
+      - numpy >=1.16
 
 test:
     commands:
