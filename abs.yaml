@@ -1,0 +1,12 @@
+build_env_vars:
+  ANACONDA_ROCKET_ENABLE_PY313 : yes
+
+# the conda build parameters to use
+build_parameters:
+  - "--suppress-variables"
+  - "--skip-existing"
+  - "--error-overlinking"
+  - "--no-test"
+
+channels:
+  - https://staging.continuum.io/prefect/fs/numpy-feedstock/pr95/abe832a
