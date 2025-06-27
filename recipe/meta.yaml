@@ -12,7 +12,7 @@ source:
       - 0001-install_requires-mkl-service.patch
 
 build:
-  number: 0
+  number: 1
   skip: True  # [not x86]
   skip: True  # [py<39 or osx]
   script: {{PYTHON}} -m pip install --no-build-isolation --no-deps .
@@ -21,6 +21,7 @@ build:
 
 requirements:
     build:
+      - {{ stdlib('c') }}  # [linux]
       - {{ compiler('c') }}
       - patch  # [unix]
       - m2-patch  # [win]
@@ -29,14 +30,14 @@ requirements:
       - pip
       - setuptools
       - wheel
-      - mkl-devel  {{ mkl }}
+      - mkl-devel 2025.*
       - cython 3
       - numpy-base 2
     run:
       - python
       - mkl
       - mkl-service
-      - numpy >=1.16
+      - numpy >=1.16,<3
 
 test:
     commands:
@@ -67,5 +68,7 @@ about:
     doc_url: https://github.com/IntelPython/mkl_fft
 
 extra:
+  skip-lints:
+    - cbc_dep_in_run_missing_from_host
   recipe-maintainers:
      - oleksandr-pavlyk
