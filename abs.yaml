@@ -10,9 +10,3 @@ build_parameters:
   - "--skip-existing"
   - "--error-overlinking"
   - "--no-test"
-
-channels:
-  - https://staging.continuum.io/prefect/fs/numpy-feedstock/pr101/7a39196
-  - https://staging.continuum.io/prefect/fs/numpy-feedstock/pr102/8d3cf79
-  - https://staging.continuum.io/prefect/fs/numpy-feedstock/pr103/7538eef
-  - brianwing
