@@ -3,6 +3,7 @@ pkg_build_image_tag: main-rockylinux-8
 
 build_env_vars:
   ANACONDA_ROCKET_GLIBC: "2.28"
+  ANACONDA_ROCKET_ENABLE_PY314: yes
 
 # the conda build parameters to use
 build_parameters:
@@ -10,3 +11,6 @@ build_parameters:
   - "--skip-existing"
   - "--error-overlinking"
   - "--no-test"
+
+channels:
+  - ad-testing/label/py314
