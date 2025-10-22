@@ -23,10 +23,12 @@ requirements:
     host:
       - python
       - pip
-      - setuptools >=77
+      - setuptools
       - mkl-devel 2025.*
       - cython 3
-      - numpy-base 2
+      # numpy-base 2.3.0 no longer supports Python 3.10: https://numpy.org/devdocs/release/2.3.0-notes.html
+      - numpy-base >=2,<2.3  # [py<311]
+      - numpy-base >=2.3,<3   # [py>=311]
     run:
       - python
       - mkl
