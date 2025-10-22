@@ -26,7 +26,7 @@ requirements:
     host:
       - python
       - pip
-      - setuptools >=77
+      - setuptools
       - mkl-devel 2025.*
       - cython 3
       - numpy-base 2
