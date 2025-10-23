@@ -47,7 +47,7 @@ test:
     requires:
       - pytest
       - pip
-      - scipy >=1.10
+      - scipy >=1.10  # [py<314]
     imports:
       - mkl_fft
       - mkl_fft.interfaces
