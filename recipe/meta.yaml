@@ -14,7 +14,6 @@ build:
   number: 0
   skip: True  # [not x86]
   # numpy-base 2.3.0 no longer supports Python 3.10: https://numpy.org/devdocs/release/2.3.0-notes.html
-  # numpy-base <=2.3.3 has setuptools <74 which is not supported by mkl_fft 2.1.1.
   skip: True  # [py<311 or osx]
   script: {{PYTHON}} -m pip install --no-build-isolation --no-deps . -vv
   script_env:
@@ -30,9 +29,9 @@ requirements:
       - cython 3
       - mkl-devel 2025.*
       - numpy-base >=2.3,<3
-      # numpy-base <=2.3.3 has setuptools <74 at runtime but we can't use it here because of an error:
-      # ValueError: invalid pyproject.toml config: `project.license`. 
-      - setuptools >=77
+      # numpy-base 2.3.3 requires setuptools <74
+      # The patch changes license format to {text = "BSD"} which works with setuptools <74
+      - setuptools >=64,<74
     run:
       - python
       - mkl
