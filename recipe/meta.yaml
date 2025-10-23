@@ -25,12 +25,12 @@ requirements:
     host:
       - python
       - pip
-      # numpy-base <=2.3.3 has setuptools <74 at runtime but we can't use it here because of an error:
-      # ValueError: invalid pyproject.toml config: `project.license`.
-      - setuptools >=77
-      - mkl-devel 2025.*
       - cython 3
+      - mkl-devel 2025.*
       - numpy-base >=2.3,<3
+      # numpy-base <=2.3.3 has setuptools <74 at runtime but we can't use it here because of an error:
+      # ValueError: invalid pyproject.toml config: `project.license`. 
+      - setuptools >=77
     run:
       - python
       - mkl
@@ -49,8 +49,6 @@ test:
       - scipy >=1.10
     imports:
       - mkl_fft
-      - mkl_fft._numpy_fft
-      - mkl_fft._scipy_fft
       - mkl_fft.interfaces
       - mkl_fft.interfaces.numpy_fft
       - mkl_fft.interfaces.scipy_fft
