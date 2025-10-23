@@ -1,0 +1,38 @@
+From 11037ad6eb9dfc6f9784d251523d5afabc51fdd0 Mon Sep 17 00:00:00 2001
+From: Serhii Kupriienko
+Date: Thu, 23 Oct 2025 11:22:37 +0300
+Subject: [PATCH] Fix pyproject.toml license format and python version constraint
+
+---
+ pyproject.toml | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/pyproject.toml b/pyproject.toml
+index 3264dce..05f914e 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -25,7 +25,7 @@
+ 
+ [build-system]
+ build-backend = "setuptools.build_meta"
+-requires = ["setuptools>=77", "Cython", "numpy", "mkl-devel"]
++requires = ["setuptools>=64", "Cython", "numpy", "mkl-devel"]
+ 
+ [project]
+ authors = [
+@@ -54,10 +54,10 @@ dependencies = ["numpy>=1.26.4", "mkl-service"]
+ description = "MKL-based FFT transforms for NumPy arrays"
+ dynamic = ["version"]
+ keywords = ["DFTI", "FFT", "Fourier", "MKL"]
+-license = "BSD-3-Clause"
++license = {text = "BSD-3-Clause"}
+ name = "mkl_fft"
+ readme = {file = "README.md", content-type = "text/markdown"}
+-requires-python = ">=3.9,<3.14"
++requires-python = ">=3.9,<3.15"
+ 
+ [project.optional-dependencies]
+ scipy_interface = ["scipy>=1.10"]
+-- 
+2.50.1 (Apple Git-155)
+
