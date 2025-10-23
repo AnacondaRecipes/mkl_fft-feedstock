@@ -1,0 +1,16 @@
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -2,7 +2,7 @@
+ build-backend = "setuptools.build_meta"
+-requires = ["setuptools>=77", "Cython", "numpy", "mkl-devel"]
++requires = ["setuptools", "Cython", "numpy", "mkl-devel"]
+ 
+ [project]
+ authors = [
+@@ -24,7 +24,7 @@ dependencies = ["numpy>=1.26.4", "mkl-service"]
+ description = "MKL-based FFT transforms for NumPy arrays"
+ dynamic = ["version"]
+ keywords = ["DFTI", "FFT", "Fourier", "MKL"]
+-license = "BSD-3-Clause"
++license = { file = "LICENSE.txt" }
+ name = "mkl_fft"

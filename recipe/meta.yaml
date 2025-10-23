@@ -7,6 +7,8 @@ package:
 source:
     url: https://github.com/IntelPython/mkl_fft/archive/{{version}}.tar.gz
     sha256: d9a70b95d183488f4e97e296e91ee90034f5fe1d01d11506d696935fa942795b
+    patches:
+      - 0001-fix-pyproject-license.patch
 
 build:
   number: 0
