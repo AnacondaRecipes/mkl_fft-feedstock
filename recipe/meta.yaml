@@ -48,6 +48,7 @@ test:
       - pytest
       - pip
       - scipy >=1.10  # [py<314]
+      - python 3.14 # [py==314]
     imports:
       - mkl_fft
       - mkl_fft.interfaces
