@@ -13,7 +13,8 @@ source:
 build:
   number: 0
   skip: True  # [not x86]
-  skip: True  # [py<39 or osx]
+  # Python 3.9 fails on our CI with "ERROR: Failed to get package records, max retries exceeded."rror
+  skip: True  # [py<310 or osx]
   script: {{PYTHON}} -m pip install --no-build-isolation --no-deps . -vv
   script_env:
    - MKLROOT={{PREFIX}}
