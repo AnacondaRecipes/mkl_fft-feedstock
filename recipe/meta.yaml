@@ -13,22 +13,21 @@ source:
 build:
   number: 0
   skip: True  # [not x86]
-  # numpy-base 2.3.0 no longer supports Python 3.10: https://numpy.org/devdocs/release/2.3.0-notes.html
-  skip: True  # [py<311 or osx]
+  skip: True  # [py<39 or osx]
   script: {{PYTHON}} -m pip install --no-build-isolation --no-deps . -vv
   script_env:
    - MKLROOT={{PREFIX}}
 
 requirements:
     build:
-      - {{ stdlib('c') }}  # [linux]
+      - {{ stdlib('c') }}
       - {{ compiler('c') }}
     host:
       - python
       - pip
       - cython 3
       - mkl-devel 2025.*
-      - numpy-base >=2.3,<3
+      - numpy-base {{ numpy }}
       # numpy-base 2.3.3 requires setuptools <74
       # The patch changes license format to {text = "BSD"} which works with setuptools <74
       - setuptools >=64,<74
@@ -48,7 +47,6 @@ test:
       - pytest
       - pip
       - scipy >=1.10  # [py<314]
-      - python 3.14 # [py==314]
     imports:
       - mkl_fft
       - mkl_fft.interfaces
