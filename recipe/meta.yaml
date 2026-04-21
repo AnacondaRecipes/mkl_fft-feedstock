@@ -1,74 +1,75 @@
-{% set version = "2.1.1" %}
+{% set version = "2.2.0" %}
 
 package:
-    name: mkl_fft
-    version: {{ version }}
+  name: mkl_fft
+  version: {{ version }}
 
 source:
-    url: https://github.com/IntelPython/mkl_fft/archive/{{version}}.tar.gz
-    sha256: d9a70b95d183488f4e97e296e91ee90034f5fe1d01d11506d696935fa942795b
-    patches:
-      - 0001-fix-pyproject-toml.patch
+  url: https://github.com/IntelPython/mkl_fft/archive/{{version}}.tar.gz
+  sha256: 6314b881b83f5e0cdffd91057cc31eafc14e7ba05f2ab1941d2ca9ede5eeb6ab
+  patches:
+    - 0001-fix-pyproject-toml.patch
 
 build:
   number: 0
-  skip: True  # [not x86]
+  skip: true  # [not x86]
   # Python 3.9 fails on our CI with "ERROR: Failed to get package records, max retries exceeded."rror
-  skip: True  # [py<310 or osx]
+  skip: true  # [py<310 or osx]
   script: {{PYTHON}} -m pip install --no-build-isolation --no-deps . -vv
   script_env:
-   - MKLROOT={{PREFIX}}
+    - MKLROOT={{PREFIX}}
 
 requirements:
-    build:
-      - {{ stdlib('c') }}
-      - {{ compiler('c') }}
-    host:
-      - python
-      - pip
-      - cython 3
-      - mkl-devel 2025.*
-      - numpy-base {{ numpy }}
-      # numpy-base 2.3.3 requires setuptools <74
-      # The patch changes license format to {text = "BSD"} which works with setuptools <74
-      - setuptools >=64,<74
-    run:
-      - python
-      - mkl
-      - mkl-service
-      - numpy >=1.26.4,<3
-    run_constrained:
-      - scipy >=1.10
+  build:
+    - {{ stdlib('c') }}
+    - {{ compiler('c') }}
+  host:
+    - python
+    - pip
+    - cython
+    - mkl-devel
+    - numpy-base {{ numpy }}
+    # numpy-base 2.3.3 requires setuptools <74
+    # The patch changes license format to {text = "BSD"} which works with setuptools <74
+    - setuptools >=77
+    - numpy
+  run:
+    - python
+    - mkl
+    - mkl-service
+    - numpy >=1.26.4
+  run_constrained:
+    - scipy >=1.10
 
 test:
-    commands:
-      - pytest -v --pyargs mkl_fft
-      - pip check
-    requires:
-      - pytest
-      - pip
-      - scipy >=1.10  # [py<314]
-    imports:
-      - mkl_fft
-      - mkl_fft.interfaces
-      - mkl_fft.interfaces.numpy_fft
-      - mkl_fft.interfaces.scipy_fft
+  commands:
+    - pytest -v --pyargs mkl_fft
+    - pip check
+  requires:
+    - pytest
+    - pip
+    - scipy >=1.10  # [py<314]
+  imports:
+    - mkl_fft
+    - mkl_fft.interfaces
+    - mkl_fft.interfaces.numpy_fft
+    - mkl_fft.interfaces.scipy_fft
 
 about:
-    home: https://github.com/IntelPython/mkl_fft
-    license: BSD-3-Clause
-    license_file: LICENSE.txt
-    license_family: BSD
-    description:
-        NumPy-based implementation of Fast Fourier Transform using Intel (R) Math Kernel Library.
-        Supports in-place and out-of-place, 1D and ND complex FFT on arrays of single and double precision
-        with arbitrary memory layout, so long as array strides are multiples of its itemsize.
-    summary: NumPy-based implementation of Fast Fourier Transform using Intel (R) Math Kernel Library.
-    dev_url: https://github.com/IntelPython/mkl_fft
-    doc_url: https://github.com/IntelPython/mkl_fft
+  home: https://github.com/IntelPython/mkl_fft
+  license: BSD-3-Clause
+  license_file: LICENSE.txt
+  license_family: BSD
+  description:
+    - NumPy-based implementation of Fast Fourier Transform using Intel (R) Math Kernel Library.
+    - Supports in-place and out-of-place, 1D and ND complex FFT on arrays of single and double precision
+    - with arbitrary memory layout, so long as array strides are multiples of its itemsize.
+  summary: NumPy-based implementation of Fast Fourier Transform using Intel (R) Math Kernel Library.
+  dev_url: https://github.com/IntelPython/mkl_fft
+  doc_url: https://github.com/IntelPython/mkl_fft
 
 extra:
   skip-lints:
     - cbc_dep_in_run_missing_from_host
   recipe-maintainers:
-     - oleksandr-pavlyk
+    - oleksandr-pavlyk
