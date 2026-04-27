@@ -1,0 +1,25 @@
+From b56b58c35074e93cf30389566b6abadde2613928 Mon Sep 17 00:00:00 2001
+From: Ivan Iziumov <iiziumov@anaconda.com>
+Date: Mon, 27 Apr 2026 16:04:22 +0200
+Subject: [PATCH] fix mkl test
+
+---
+ pyproject.toml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pyproject.toml b/pyproject.toml
+index a17d776..fda3e40 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -50,7 +50,7 @@ classifiers = [
+   "Operating System :: POSIX",
+   "Operating System :: Unix"
+ ]
+-dependencies = ["numpy>=1.26.4", "mkl"]
++dependencies = ["numpy>=1.26.4"]
+ description = "MKL-based FFT transforms for NumPy arrays"
+ dynamic = ["version"]
+ keywords = ["DFTI", "FFT", "Fourier", "MKL"]
+-- 
+2.51.0
+
