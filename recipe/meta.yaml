@@ -1,20 +1,21 @@
-{% set version = "2.1.1" %}
+{% set name = "mkl_fft" %}
+{% set version = "2.2.0" %}
 
 package:
-    name: mkl_fft
+    name: {{ name|lower }}
     version: {{ version }}
 
 source:
-    url: https://github.com/IntelPython/mkl_fft/archive/{{version}}.tar.gz
-    sha256: d9a70b95d183488f4e97e296e91ee90034f5fe1d01d11506d696935fa942795b
+    url: https://github.com/IntelPython/{{ name }}/archive/{{ version }}.tar.gz
+    sha256: 6314b881b83f5e0cdffd91057cc31eafc14e7ba05f2ab1941d2ca9ede5eeb6ab
     patches:
-      - 0001-fix-pyproject-toml.patch
+      - patches/0001-fix-mkl-test.patch
 
 build:
   number: 0
-  skip: True  # [not x86]
-  # Python 3.9 fails on our CI with "ERROR: Failed to get package records, max retries exceeded."rror
-  skip: True  # [py<310 or osx]
+  skip: true  # [not x86]
+  skip: true  # [py<310]
+  skip: true  # [osx]
   script: {{PYTHON}} -m pip install --no-build-isolation --no-deps . -vv
   script_env:
    - MKLROOT={{PREFIX}}
@@ -24,30 +25,27 @@ requirements:
       - {{ stdlib('c') }}
       - {{ compiler('c') }}
     host:
-      - python
       - pip
-      - cython 3
-      - mkl-devel 2025.*
+      - python
+      - cython
+      - mkl-devel {{ mkl }}
       - numpy-base {{ numpy }}
-      # numpy-base 2.3.3 requires setuptools <74
-      # The patch changes license format to {text = "BSD"} which works with setuptools <74
-      - setuptools >=64,<74
+      - setuptools >=77
     run:
       - python
       - mkl
-      - mkl-service
-      - numpy >=1.26.4,<3
+      - numpy >=1.26.4
     run_constrained:
       - scipy >=1.10
 
 test:
     commands:
-      - pytest -v --pyargs mkl_fft
       - pip check
+      - pytest -v --pyargs mkl_fft
     requires:
-      - pytest
       - pip
-      - scipy >=1.10  # [py<314]
+      - pytest
+      - scipy >=1.10
     imports:
       - mkl_fft
       - mkl_fft.interfaces
