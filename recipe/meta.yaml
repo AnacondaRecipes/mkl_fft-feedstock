@@ -29,7 +29,7 @@ requirements:
       - pip
       - python
       - cython
-      - mkl-devel {{ mkl }}
+      - mkl-devel 2025.*
       - numpy-base {{ numpy }}
       - setuptools >=77
     run:
