@@ -14,12 +14,14 @@ source:
 
 build:
   number: 0
-  skip: true  # [not x86]
-  skip: true  # [py<315 or py>=316]
-  skip: true  # [osx]
+  skip: true  # [not x86 or py<315 or py>=316 or osx]
   script: {{PYTHON}} -m pip install --no-build-isolation --no-deps . -vv
   script_env:
    - MKLROOT={{PREFIX}}
+  # py315 extensions use the Windows CRT directly.
+  ignore_run_exports:
+    - vc14_runtime  # [win]
+    - ucrt          # [win]
 
 requirements:
     build:
