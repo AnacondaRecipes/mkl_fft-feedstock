@@ -10,11 +10,12 @@ source:
     sha256: 6314b881b83f5e0cdffd91057cc31eafc14e7ba05f2ab1941d2ca9ede5eeb6ab
     patches:
       - patches/0001-fix-mkl-test.patch
+      - patches/0002-enable-python-3.15.patch
 
 build:
   number: 0
   skip: true  # [not x86]
-  skip: true  # [py<310]
+  skip: true  # [py<315 or py>=316]
   skip: true  # [osx]
   script: {{PYTHON}} -m pip install --no-build-isolation --no-deps . -vv
   script_env:
