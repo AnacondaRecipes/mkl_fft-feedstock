@@ -12,12 +12,6 @@ upload_channels:
 
 channels:
   - ad-testing/label/py315
-  # numpy-base py315 is on PR staging until review-gated promotion.
-  # mkl-service is also staged for numpy-base's runtime solve, and cython
-  # is a direct host dependency. Strip all staging URLs before merge (U12).
-  - https://staging.continuum.io/pbp/fs/cython-feedstock/pr35/867291d
-  - https://staging.continuum.io/pbp/fs/numpy-feedstock/pr156/cf8cbe0
-  - https://staging.continuum.io/pbp/fs/mkl-service-feedstock/pr9/87ff497
 
 build_env_vars:
   ANACONDA_ROCKET_GLIBC: "2.28"
