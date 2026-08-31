@@ -8,3 +8,5 @@ channels:
   - https://staging.continuum.io/pbp/fs/setuptools-feedstock/pr109/9b1e75c
   - https://staging.continuum.io/pbp/fs/meson-python-feedstock/pr22/fd7905b
   - https://staging.continuum.io/pbp/fs/packaging-feedstock/pr26/ed52c28
+  - https://staging.continuum.io/pbp/fs/mkl-service-feedstock/pr10/55939a2
+  - https://staging.continuum.io/pbp/fs/wheel-feedstock/pr18/42eaeb2
