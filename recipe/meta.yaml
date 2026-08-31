@@ -12,7 +12,7 @@ source:
       - patches/0001-fix-mkl-test.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [not x86]
   skip: true  # [py<310]
   skip: true  # [osx]
