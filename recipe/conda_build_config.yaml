@@ -4,6 +4,8 @@ python:
   - "3.14.* *_cp314t"
 numpy:
   - 2.5
+mkl:
+  - "2025"
 zip_keys:
   -
     - python
