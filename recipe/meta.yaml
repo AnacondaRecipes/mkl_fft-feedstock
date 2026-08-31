@@ -29,6 +29,7 @@ requirements:
       - python
       - cython
       - mkl-devel {{ mkl }}
+      - mkl-service 2.7.2
       - numpy-base {{ numpy }}
       - setuptools >=77
     run:
