@@ -12,7 +12,7 @@ source:
       - patches/0001-fix-mkl-test.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [not x86]
   skip: true  # [py<310]
   skip: true  # [osx]
@@ -29,7 +29,9 @@ requirements:
       - python
       - cython
       - mkl-devel {{ mkl }}
-      - numpy-base {{ numpy }}
+      - mkl-service 2.7.2
+      - numpy-base 2.5.2  # [py>=312]
+      - numpy-base {{ numpy }}  # [py<312]
       - setuptools >=77
     run:
       - python
