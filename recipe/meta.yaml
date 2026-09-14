@@ -24,19 +24,20 @@ requirements:
     build:
       - {{ stdlib('c') }}
       - {{ compiler('c') }}
+      - cmake
+      - ninja-base
     host:
       - pip
       - python
       - meson-python >=0.13.0
-      - ninja-base
-      - cython
-      - numpy
-      - cmake
+      - cython >=3.2.9
+      - numpy  {{ numpy }}
     run:
       - python
-      - mkl
       - numpy >=1.26.4
     run_constrained:
+      # benchmark
+      - asv >=0.6.0
       - scipy >=1.10
 
 test:
@@ -58,7 +59,7 @@ about:
     license: BSD-3-Clause
     license_file: LICENSE.txt
     license_family: BSD
-    description:
+    description: |
         NumPy-based implementation of Fast Fourier Transform using Intel (R) Math Kernel Library.
         Supports in-place and out-of-place, 1D and ND complex FFT on arrays of single and double precision
         with arbitrary memory layout, so long as array strides are multiples of its itemsize.
