@@ -1,13 +1,13 @@
 {% set name = "mkl_fft" %}
-{% set version = "2.2.0" %}
+{% set version = "2.3.2" %}
 
 package:
-    name: {{ name|lower }}
+    name: {{ name }}
     version: {{ version }}
 
 source:
     url: https://github.com/IntelPython/{{ name }}/archive/{{ version }}.tar.gz
-    sha256: 6314b881b83f5e0cdffd91057cc31eafc14e7ba05f2ab1941d2ca9ede5eeb6ab
+    sha256: 31565b5c221fe131b1a9e6e0e60a206b6ada95cbabf7c3ac5dfd24699fd1b994
     patches:
       - patches/0001-fix-mkl-test.patch
 
@@ -27,10 +27,12 @@ requirements:
     host:
       - pip
       - python
+      - meson-python >=0.13.0
+      - ninja-base
       - cython
+      - numpy
       - mkl-devel {{ mkl }}
-      - numpy-base {{ numpy }}
-      - setuptools >=77
+      - cmake
     run:
       - python
       - mkl
@@ -39,18 +41,18 @@ requirements:
       - scipy >=1.10
 
 test:
-    commands:
-      - pip check
-      - pytest -v --pyargs mkl_fft
-    requires:
-      - pip
-      - pytest
-      - scipy >=1.10
     imports:
       - mkl_fft
       - mkl_fft.interfaces
       - mkl_fft.interfaces.numpy_fft
       - mkl_fft.interfaces.scipy_fft
+    commands:
+      - pip check
+      - pytest -vv --pyargs mkl_fft
+    requires:
+      - pip
+      - pytest
+      - scipy >=1.10
 
 about:
     home: https://github.com/IntelPython/mkl_fft
