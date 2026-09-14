@@ -30,6 +30,7 @@ requirements:
       # To prevent circular dependency with numpy:
       # mkl_fft needs numpy, but numpy needs mkl_fft
       - numpy-base  {{ numpy }}
+      - mkl-devel {{ mkl }}
     run:
       - python
       - {{ pin_compatible('mkl') }}
