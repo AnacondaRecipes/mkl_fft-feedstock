@@ -13,12 +13,12 @@ source:
 
 build:
   number: 0
-  skip: true  # [not x86]
-  skip: true  # [py<310]
-  skip: true  # [osx]
+  skip: true  # [not x86 or py<310 or osx]
   script: {{PYTHON}} -m pip install --no-build-isolation --no-deps . -vv
   script_env:
    - MKLROOT={{PREFIX}}
+  ignore_run_exports:
+    - blas
 
 requirements:
     build:
@@ -34,6 +34,7 @@ requirements:
       - numpy  {{ numpy }}
     run:
       - python
+      - {{ pin_compatible('mkl') }}
       - numpy >=1.26.4
     run_constrained:
       # benchmark
