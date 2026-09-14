@@ -1,63 +1,65 @@
 {% set name = "mkl_fft" %}
-{% set version = "2.2.0" %}
+{% set version = "2.3.2" %}
 
 package:
-    name: {{ name|lower }}
+    name: {{ name }}
     version: {{ version }}
 
 source:
     url: https://github.com/IntelPython/{{ name }}/archive/{{ version }}.tar.gz
-    sha256: 6314b881b83f5e0cdffd91057cc31eafc14e7ba05f2ab1941d2ca9ede5eeb6ab
-    patches:
-      - patches/0001-fix-mkl-test.patch
+    sha256: 31565b5c221fe131b1a9e6e0e60a206b6ada95cbabf7c3ac5dfd24699fd1b994
 
 build:
   number: 0
-  skip: true  # [not x86]
-  skip: true  # [py<310]
-  skip: true  # [osx]
+  skip: true  # [not x86 or py<310 or osx]
   script: {{PYTHON}} -m pip install --no-build-isolation --no-deps . -vv
   script_env:
-   - MKLROOT={{PREFIX}}
+   - MKLROOT={{PREFIX}}  # [not win]
+   - MKLROOT={{PREFIX}}\Library  # [win]
 
 requirements:
     build:
       - {{ stdlib('c') }}
       - {{ compiler('c') }}
+      - cmake
+      - ninja-base
     host:
       - pip
       - python
-      - cython
+      - meson-python >=0.13.0
+      - cython >=3.2.9
+      # To prevent circular dependency with numpy:
+      # mkl_fft needs numpy, but numpy needs mkl_fft
+      - numpy-base  {{ numpy }}
       - mkl-devel {{ mkl }}
-      - numpy-base {{ numpy }}
-      - setuptools >=77
     run:
       - python
-      - mkl
       - numpy >=1.26.4
     run_constrained:
+      # benchmark
+      - asv >=0.6.0
       - scipy >=1.10
 
 test:
-    commands:
-      - pip check
-      - pytest -v --pyargs mkl_fft
-    requires:
-      - pip
-      - pytest
-      - scipy >=1.10
     imports:
       - mkl_fft
       - mkl_fft.interfaces
       - mkl_fft.interfaces.numpy_fft
       - mkl_fft.interfaces.scipy_fft
+    commands:
+      - pip check
+      - pytest -vv --pyargs mkl_fft
+    requires:
+      - pip
+      - pytest
+      - scipy >=1.10
 
 about:
     home: https://github.com/IntelPython/mkl_fft
     license: BSD-3-Clause
     license_file: LICENSE.txt
     license_family: BSD
-    description:
+    description: |
         NumPy-based implementation of Fast Fourier Transform using Intel (R) Math Kernel Library.
         Supports in-place and out-of-place, 1D and ND complex FFT on arrays of single and double precision
         with arbitrary memory layout, so long as array strides are multiples of its itemsize.
