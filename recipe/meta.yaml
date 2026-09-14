@@ -14,7 +14,8 @@ build:
   skip: true  # [not x86 or py<310 or osx]
   script: {{PYTHON}} -m pip install --no-build-isolation --no-deps . -vv
   script_env:
-   - MKLROOT={{PREFIX}}
+   - MKLROOT={{PREFIX}}  # [not win]
+   - MKLROOT={{PREFIX}}\Library  # [win]
 
 requirements:
     build:
