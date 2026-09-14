@@ -31,7 +31,7 @@ requirements:
       - python
       - meson-python >=0.13.0
       - cython >=3.2.9
-      - numpy  {{ numpy }}
+      - numpy-base  {{ numpy }}
     run:
       - python
       - {{ pin_compatible('mkl') }}
