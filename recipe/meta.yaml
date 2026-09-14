@@ -8,8 +8,6 @@ package:
 source:
     url: https://github.com/IntelPython/{{ name }}/archive/{{ version }}.tar.gz
     sha256: 31565b5c221fe131b1a9e6e0e60a206b6ada95cbabf7c3ac5dfd24699fd1b994
-    patches:
-      - patches/0001-fix-mkl-test.patch
 
 build:
   number: 0
@@ -17,8 +15,6 @@ build:
   script: {{PYTHON}} -m pip install --no-build-isolation --no-deps . -vv
   script_env:
    - MKLROOT={{PREFIX}}
-  ignore_run_exports:
-    - blas
 
 requirements:
     build:
@@ -31,6 +27,8 @@ requirements:
       - python
       - meson-python >=0.13.0
       - cython >=3.2.9
+      # To prevent circular dependency with numpy:
+      # mkl_fft needs numpy, but numpy needs mkl_fft
       - numpy-base  {{ numpy }}
     run:
       - python
