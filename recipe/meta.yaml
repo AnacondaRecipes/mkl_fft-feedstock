@@ -31,7 +31,6 @@ requirements:
       - ninja-base
       - cython
       - numpy
-      - mkl-devel {{ mkl }}
       - cmake
     run:
       - python
