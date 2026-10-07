@@ -1,0 +1,23 @@
+From 5ae81f9fb8a25b2b67bf572e3fcc73d79f99ae6d Mon Sep 17 00:00:00 2001
+From: Serhii Kupriienko <skupriienko@anaconda.com>
+Date: Wed, 7 Oct 2026 13:18:47 +0000
+Subject: [PATCH] Allow Python 3.15 in requires-python
+
+Upstream 2.3.2 still declares requires-python >=3.10,<3.15. Widen the upper bound to <3.16 so the package can be built and installed against Python 3.15.
+---
+ pyproject.toml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pyproject.toml b/pyproject.toml
+index 3f34aee..5988880 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -62,7 +62,7 @@ keywords = ["DFTI", "FFT", "Fourier", "MKL"]
+ license = "BSD-3-Clause"
+ name = "mkl_fft"
+ readme = {file = "README.md", content-type = "text/markdown"}
+-requires-python = ">=3.10,<3.15"
++requires-python = ">=3.10,<3.16"
+ 
+ [project.optional-dependencies]
+ benchmark = ["asv>=0.6", "psutil", "scipy>=1.10"]
