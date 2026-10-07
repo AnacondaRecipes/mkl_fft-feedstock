@@ -19,6 +19,10 @@ build:
   script_env:
    - MKLROOT={{PREFIX}}  # [not win]
    - MKLROOT={{PREFIX}}\Library  # [win]
+  # py315 extensions use the Windows CRT directly (overdepending).
+  ignore_run_exports:
+    - vc14_runtime  # [win and py>=315]
+    - ucrt          # [win and py>=315]
 
 requirements:
     build:
